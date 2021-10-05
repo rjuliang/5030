@@ -1,0 +1,31 @@
+Please Read Before Reviewing :)
+
+Your program for the code review lab goes in this directory
+
+Hi Dear Reviewer:
+
+- IMPORTANT: The main code to review is in the file 'process.js', which is located in the 'assets' folder.
+    -This file contains the main logic to convert a word to lower case
+
+- This is an JavaScript application that runs from an HTML page
+- To run the application, please open the 'index.html' file in Google Chrome or Firefox
+- You can see the test results in the browser as soon as you open the 'index.html' file
+- You can also see an example of the test results at the bottom of the 'tests.js' file, which is located in the assets folder
+
+- What files are in the app?
+    -Assets/
+        - form-handler.js -> This is to handle reload in the HTML form element
+        - languages-list.js -> This is where we store the languages array
+        - populate-options.js -> Creates the language options in the dropdown so user can select it
+        - process.js -> MAIN logic of the lower case
+        - style.css -> Design stylesheet
+        - tests.js -> Logic to run the tests
+    - index.html -> index of the application
+    - README -> Helpful information to know
+    - tests.tsv -> Raw test data
+
+
+
+
+
+

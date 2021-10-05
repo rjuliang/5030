@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+    <head>
+        <title>Language Lower Caser</title>
+        <!--Linking CSS and some Script files-->
+        <link rel="stylesheet" type="text/css" href="assets/style.css">
+        <script type="application/javascript" src="assets/languages-list.js"></script>
+        
+        <meta charset="utf-8">
+    </head>
+    <body>
+
+        <!--Main title of the page-->
+        <h1>Language Lower Caser</h1>
+
+        <!--Form that triggers the lowerCaseWord function on submit-->
+        <form id="formToLowercaseWord" onsubmit="return lowerCaseWord()">
+
+            <label for="wordField">Type your word here:</label><br>
+            <input
+                type="text" 
+                id="wordField"
+                name="word"><br><br>
+
+            <label for="languageDropdown">Select the language: </label><br>
+            <select 
+                id="languageDropdown" 
+                name="language">
+            </select><br><br>
+
+            <input 
+                type="submit" 
+                value="Lower Case Word"
+                id="submitBtn">
+
+        </form>
+        <br><br><br>
+
+        
+        <div class="result" id="lowercasedDiv">
+            <p>Your word in lower case:</p>
+            <p id="lowercased">
+                <!--In here, we show the final lowercased word-->
+            </p>
+        </div>
+        <br><br><br>
+        
+        <div id="testResults">
+                <!--In here, we show the test results-->
+        </div>
+
+        <!--We call some Scripts for the background processes-->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script type="application/javascript" src="assets/form-handler.js"></script>
+        <script type="application/javascript" src="assets/populate-options.js"></script>
+        <script type="application/javascript" src="assets/process.js"></script>
+        <script type="application/javascript" src="assets/tests.js"></script>
+    </body>
+    
+</html>
