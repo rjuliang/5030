@@ -1,5 +1,6 @@
 
 /*
+This is the file where we store the languages array
 Thanks to https://www.html-code-generator.com/javascript/json/languages-name-and-code for providing this languages array
 */
 

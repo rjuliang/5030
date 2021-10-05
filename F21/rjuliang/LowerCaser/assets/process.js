@@ -1,3 +1,9 @@
+/**
+ * TO REVIEW
+ * This is the file where the main logic is located
+ */
+
+
 //This hides the div where we include the lowercase result
     document.getElementById('lowercasedDiv').style.display = "none";
 
