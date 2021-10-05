@@ -4,9 +4,9 @@
 
 /**
  * The following (lowerCaseWord) is the function that gets called when user clicks 'Lower Case Word' button
+ * - The tests.js file also calls this function directly
  * - It takes a string word, a string language and a boolean unitTest as parameters
- * - The test.js file also calls this function directly
- * - As we are modifying the HTML, we use the unitest variable to help us know if the function is ran by the user or a test
+ * - As we are modifying the HTML with this javascript code, we use the unitest variable to help us know if the function is ran by the user or a test
  *      -When running from the test.js file, unitTest is set true, otherwise, is empty
 */
     const lowerCaseWord = (word, language, unitTest) =>{
@@ -15,7 +15,7 @@
         if(!unitTest)
             unitTest = false;
 
-        //Then, if the word was not provided by the parameter, we get the value typed by the user
+        //Then, if the word was not provided by the parameter, we get the value typed by the user in the interace
         if(!word)
             word = document.getElementById('wordField').value;
 
@@ -24,7 +24,7 @@
 
             //If there is a word present: 
 
-            //Get the code of the language selected by the user
+            //If there was not a language code provided in the function, check for the language code selected by the user
             
             if(!language)
                 language = document.getElementById('languageDropdown').value;

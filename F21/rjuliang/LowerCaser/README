@@ -1,13 +1,11 @@
 Please Read Before Reviewing :)
 
-Your program for the code review lab goes in this directory
-
 Hi Dear Reviewer:
 
 - IMPORTANT: The main code to review is in the file 'process.js', which is located in the 'assets' folder.
     -This file contains the main logic to convert a word to lower case
 
-- This is an JavaScript application that runs from an HTML page
+- However, this is a JavaScript application that runs from an HTML page
 - To run the application, please open the 'index.html' file in Google Chrome or Firefox
 - You can see the test results in the browser as soon as you open the 'index.html' file
 - You can also see an example of the test results at the bottom of the 'tests.js' file, which is located in the assets folder
@@ -20,9 +18,31 @@ Hi Dear Reviewer:
         - process.js -> MAIN logic of the lower case
         - style.css -> Design stylesheet
         - tests.js -> Logic to run the tests
-    - index.html -> index of the application
+    - index.html -> main index of the application
     - README -> Helpful information to know
     - tests.tsv -> Raw test data
+
+
+-How were the test results?
+
+    HELLO | en | hello == hello | Passed ✓
+    WORLD | en-US | world == world | Passed ✓
+    cAmEl | en-IE | camel == camel | Passed ✓
+    ---OK | en-Latn | ---ok == ---ok | Passed ✓
+    tAcht | ga | t-acht == t-acht | Passed ✓
+    tACHT | ga | t-acht == t-acht | Passed ✓
+    TACHT | ga | tacht == tacht | Passed ✓
+    nAthair | ga | n-athair == n-athair | Passed ✓
+    nATHAIR | ga | n-athair == n-athair | Passed ✓
+    NATHAIR | ga | nathair == nathair | Passed ✓
+    nÓg | ga-IE | n-óg == n-óg | Passed ✓
+    nÕg | ga-IE | nõg == nõg | Passed ✓
+    nÕg | ga-IE | nõg == n-õg | Failed ✗
+    KASIM | tr | kasım == kasım | Passed ✓
+    KASIM | en | kasim == kasim | Passed ✓
+    ΠΌΛΗΣ | el | πόλης == πόλης | Passed ✓
+    官话 | zh-Hans | 官话 == 官话 | Passed ✓
+    ภาษาไทย | th | ภาษาไทย == ภาษาไทย | Passed ✓
 
 
 

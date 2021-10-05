@@ -1,4 +1,4 @@
-//The following creates the language options in the select element HTML: 
+//The following creates the language options in the select element in HTML: 
 
     //First, import the language list in an Array from the languages-list.js file
     const LANGUAGE_DATA = languageData;
