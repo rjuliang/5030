@@ -1,8 +1,8 @@
-function my_name(code,word){
-    let arr=['A', 'E', 'I', 'O', 'U', 'Á', 'É', 'Í', 'Ó', 'Ú']
+function lowerupper(code,word){
+    let vowelArr=['A', 'E', 'I', 'O', 'U', 'Á', 'É', 'Í', 'Ó', 'Ú']
     if(code=="tr"|| code == "az"){
         temp=word;
-        temp = temp.replace('\u0049', '\u0131');
+        temp = temp.replace('\u0049', '\u0131');  /* u0049 is the unicode of Turkish, Azerbaijani uppercase I,u0131  LATIN SMALL LETTER DOTLESS I*/
         return temp;
     }
     else if(code =="ga" || code=="ga-IE"){
@@ -30,7 +30,7 @@ function my_name(code,word){
       return word;
     }
     
-    else if(code == "el"){
+    else if(code == "el"){          /* el is the unicode of Greek*/
             temp1=""
             if (word[word.length-1] == '\u03A3'){
               for(i=0;i<word.length;i++)
@@ -48,21 +48,21 @@ function my_name(code,word){
     }
   }
 }
-let a =my_name("tr","KASIM");
+let a =lowerupper("tr","KASIM");
 console.log(a.toLocaleLowerCase());
-let b = my_name("el","ΠΌΛΗΣ");
+let b = lowerupper("el","ΠΌΛΗΣ");
 console.log(b.toLocaleLowerCase());
-let c=my_name('ga',"tAcht");
+let c=lowerupper('ga',"tAcht");
 console.log(c.toLocaleLowerCase());
-let d=my_name("ga","TACHT");
+let d=lowerupper("ga","TACHT");
 console.log(d.toLocaleLowerCase());
-let e=my_name("en","HELLO");
+let e=lowerupper("en","HELLO");
 console.log(e.toLocaleLowerCase());
-let f= my_name("ga","nATHAIR");
+let f= lowerupper("ga","nATHAIR");
 console.log(f.toLocaleLowerCase());
-let g=my_name("ga","nAthair");
+let g=lowerupper("ga","nAthair");
 console.log(g.toLocaleLowerCase());
-let h =my_name("en-latn","---OK");
+let h =lowerupper("en-latn","---OK");
 console.log(h.toLocaleLowerCase());
-let j =my_name("en-IE","cAmEl");
+let j =lowerupper("en-IE","cAmEl");
 console.log(j.toLocaleLowerCase());
