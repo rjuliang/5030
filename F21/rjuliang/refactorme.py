@@ -1,84 +1,69 @@
 import unicodedata
 
-class Word:
+class LowerCaseWord:
 
-  def __init__(self, word, bcpCode, std=False):
-    self._w = word
-    self._l = bcpCode
-    self._finalSigma = False
-    self._standardIrishSpelling = std
-    # OLD EXPERIMENTAL CODE for dealing with vowel harmony
-    # self._numVowels = 0
-    # for c in word:
-    #   if c in 'aeiouAEIOU':
-    #   self._numVowels += 1
-
-  def setWord(self, w):
-    self._w = w
+  def __init__(self, word, bcpCode):
+    self.word = word
+    self.language = bcpCode
 
   def toLower(self):
-    language = self._l
-    if '-' in self._l:
-      i = self._l.find('-')
-      language = self._l[0:i]
-    if len(language)<2 or len(language)>3:
-      print("Invalid BCP-47 code")
-      return ''
-    temp = self._w
-    if language=='zh':
-      return temp
-    elif language=='ja':
-      return temp
-    elif language=='ga':
-      if len(self._w)>1:
-        if (self._w[0]=='t' or self._w[0]=='n') and unicodedata.normalize('NFC', self._w)[1] in 'AEIOU\u00c1\u00c9\u00cd\u00d3\u00da':
-          temp = self._w[0]+'-'+temp[1:]
-      return temp.lower()
-    elif language=='tr':
-      temp = self._w
-      temp = temp.replace('\u0049','\u0131')
-      return temp.lower()
-    elif language=='az':
-      temp = self._w
-      temp = temp.replace('\u0049','\u0131')
-      return temp.lower()
-    elif language=='th':
-      return temp
-    elif language=='el':
-      if temp[-1]=='\u03a3':
-        self._finalSigma = True
-        temp = temp[:-1]+'\u03c2'
-      return temp.lower()
-    elif False and language=='gd':
-      # specification doesn't ask for this language to be treated differently
-      # so this will never be called
-      if len(self._w)>1:
-        if (self._w[0]=='t' or self._w[0]=='n') and self._w[1] in 'AEIOU\u00c1\u00c9\u00cd\u00d3\u00da':
-          temp = self._w[0]+'-'+temp[1:]
-      return temp.lower()
-    else:
-      return temp.lower()
+    UPPERCASE_I = '\u0049'#I
+    LOWERCASE_DOTLESS_I = '\u0131'#ı
+    UPPERCASE_ZIGMA = '\u03a3'#Σ
+    LOWERCASE_ZIGMA = '\u03c2'#ς
+    submittedWord = self.word
 
-  def isLenited(self):
-    language = self._l
-    if '-' in self._l:
-      i = self._l.find('-')
-      language = self._l[0:i]
-    if language == 'ga' or language == 'gd':
-      if len(self._w) < 2:
-        return False
-      else:
-        return self._w[0].lower() in 'bcdfgmpst' and self._w[1].lower()=='h'
+    language = CheckDashParsingOnLng.getLanguage(self.language)
+     
+    if len(language)<2 or len(language)>3:
+      print("Invalid BCP-47 code for word:",submittedWord)
+      raise ValueError("Invalid Language")
+    
+    if language=='zh' or language=='ja' or language=='th':
+      return submittedWord
+    elif language=='ga':
+      return ProcessIrishWord.lowerCaseIrishSpecial(submittedWord)
+    elif language=='tr' or language=='az':
+      modifiedWord = submittedWord.replace(UPPERCASE_I,LOWERCASE_DOTLESS_I) 
+      return modifiedWord.lower()
+    elif language=='el':
+      if submittedWord[-1]== UPPERCASE_ZIGMA:
+        modifiedWord = submittedWord[:-1]+LOWERCASE_ZIGMA   
+      return modifiedWord.lower()
     else:
-      raise NotImplementedError('Method only available for Irish and Scottish Gaelic')
+      return submittedWord.lower()
+
+
+
+class CheckDashParsingOnLng:
+
+  def getLanguage(language):
+    if '-' in language:
+      dashPosition = language.find('-')
+      return language[0:dashPosition]
+    else:
+      return language
+
+
+class ProcessIrishWord:
+
+  def lowerCaseIrishSpecial(submittedWord):
+    UPPERCASE_VOWELS = 'AEIOU\u00c1\u00c9\u00cd\u00d3\u00da' #ÁÉÍÓÚ
+    if len(submittedWord)>1:
+      if (submittedWord[0]=='t' or submittedWord[0]=='n') and unicodedata.normalize('NFC', submittedWord)[1] in UPPERCASE_VOWELS:
+        modifiedWord = submittedWord[0]+'-'+submittedWord[1:]
+        return modifiedWord.lower()
+    return submittedWord.lower()
+
 
 if __name__=='__main__':
-  f = open('tests.tsv')
-  for line in f:
+  # Leaving enconding specification as we ran it in Windows
+  testCases = open('tests.tsv', encoding="utf-8")
+  for line in testCases:
     line = line.rstrip('\n')
-    pieces = line.split('\t')
-    w = Word(pieces[0], pieces[1])
-    answer = w.toLower()
-    if answer != pieces[2]:
-      print('Test case failed. Expected', pieces[2], 'when lowercasing',pieces[0],'in language',pieces[1],'but got',answer)
-  f.close()
+    testColumn = line.split('\t')
+    getWordClass = LowerCaseWord(testColumn[0], testColumn[1])
+    lowercasedWord = getWordClass.toLower()
+    if lowercasedWord != testColumn[2]:
+      print('Test case failed. Expected', testColumn[2], 'when lowercasing',testColumn[0],'in language',testColumn[1],'but got',lowercasedWord)
+  testCases.close()
